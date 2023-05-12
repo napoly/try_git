@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'jacoco-report-aggregation'
+    id 'org.springframework.boot' version '3.0.6'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+jacoco {
+    toolVersion = "0.8.10"
+    reportsDirectory = file("$rootDir/build/reports/jacoco")
+}
+
+test.finalizedBy {
+    testCodeCoverageReport {
+        // tests are required to run before generating the report
+        reports {
+            xml.required.set(true)
+            html.required.set(false)
+        }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
