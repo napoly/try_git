@@ -14,7 +14,7 @@ class DemoApplicationTests {
 
     @Test
     void testHelloWorld() {
-        assertEquals("hello world.. change for rebase", demoService.helloWorld());
+        assertEquals("hello world test", demoService.helloWorld());
     }
 
 }
